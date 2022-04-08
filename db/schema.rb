@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_01_10_041714) do
   create_table "restaurants", force: :cascade do |t|
     t.string "name", null: false
     t.integer "fee", default: 0, null: false
-    t.integer "time_required", null: false
+    t.integer "delivery_time", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

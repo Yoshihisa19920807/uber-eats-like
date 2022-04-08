@@ -1,4 +1,4 @@
-class Order < ActiveRecord
+class Order < ApplicationRecord
   has_many :line_foods
 
   validates :total_price, numerically: { greater_than: 0 }
