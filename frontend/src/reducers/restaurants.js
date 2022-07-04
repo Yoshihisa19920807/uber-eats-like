@@ -2,7 +2,7 @@ import { REQUEST_STATE } from '../constants';
 
 export const initialState = {
   fetchState: REQUEST_STATE.INITIAL,
-  restautantsList: [],
+  restaurantsList: [],
 };
 
 export const restaurantsActionTypes = {
@@ -10,7 +10,7 @@ export const restaurantsActionTypes = {
   FETCH_SUCCESS: 'FETCH_SUCCESS'
 }
 
-export const restaurantsReducer = (state, action => {
+export const restaurantsReducer = (state, action) => {
   switch (action.type) {
     case restaurantsActionTypes.FETCHING:
       return {
@@ -20,9 +20,9 @@ export const restaurantsReducer = (state, action => {
     case restaurantsActionTypes.FETCH_SUCCESS:
       return {
         fetchState: REQUEST_STATE.OK,
-        restautantsList: action.payload.restau
+        restaurantsList: action.payload.restaurants
       }
     default:
       throw new Error();
   }
-})
+}
