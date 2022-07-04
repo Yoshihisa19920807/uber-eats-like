@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   has_many :line_foods
 
@@ -9,7 +11,7 @@ class Order < ApplicationRecord
       line_foods.each do |line_food|
         line_food.update(is_active: false, order: self)
       end
-      self.save!
+      save!
     end
   end
 end

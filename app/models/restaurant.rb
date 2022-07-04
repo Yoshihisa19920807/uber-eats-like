@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Restaurant < ApplicationRecord
   has_many :foods
   has_many :line_foods, through: :foods
