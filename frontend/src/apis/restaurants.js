@@ -6,5 +6,5 @@ export const fetchRestaurants = () => {
   .then(res => {
     return res.data
   })
-  .catch((e) => console.errors(e))
+  .catch((e) => console.error(e))
 }
