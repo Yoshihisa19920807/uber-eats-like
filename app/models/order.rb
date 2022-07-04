@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   validates :total_price, numerically: { greater_than: 0 }
 
   # コントローラでやればいいのでは？
+  # 複数箇所で使う場合にこちらの方が都合良さげ
   def save_with_update_line_foods!(line_foods)
     ActiveRecord::Base.transaction do
       line_foods.each do |line_food|
