@@ -24,7 +24,7 @@ module Api
         # 他のレストランで注文受付をしている場合は弾く。。。でもウーバーとか別にこれOKだよな
         if LineFood.active.at_other_restaurant(@ordered_food.restaurant_id).exists?
           return render json: {
-            exsiting_restaurant_name: LineFood.active.at_other_restaurant(@ordered_food.restaurant_id)
+            existing_restaurant: LineFood.active.at_other_restaurant(@ordered_food.restaurant_id)
                                               .first.restaurant.name,
             new_restaurant: @ordered_food.restaurant.name
           }, status: :not_acceptable
@@ -40,8 +40,9 @@ module Api
       end
 
       def replace
+        # TODO: transaction
         LineFood.active.at_other_restaurant(@ordered_food.restaurant_id).each do |line_food|
-          line_food.update_attribute(active: false)
+          line_food.update(is_active: false)
         end
         set_line_food(@ordered_food)
         if @line_food.save
@@ -70,7 +71,7 @@ module Api
           @line_food = ordered_food.build_line_food(
             count: params[:count],
             restaurant: ordered_food.restaurant,
-            active: true
+            is_active: true
           )
         end
       end
