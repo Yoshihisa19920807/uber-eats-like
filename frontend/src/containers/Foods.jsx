@@ -1,11 +1,12 @@
-import React, { Fragment, useEffect, useReducer } from 'react';
+import React, { Fragment, useEffect, useReducer, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 // components
 import { LocalMallIcon, QueryBuilderIcon } from '../components/Icons/index'
 import { FoodWrapper } from '../components/FoodWrapper';
+import { FoodOrderDialog } from '../components/FoodOrderDialog';
 // reducers
 import {
   initialState as foodsInitialState,
@@ -55,6 +56,12 @@ export const Foods = ({
   match
 }) => {
   const [foodsState, dispatch] = useReducer(foodsReducer, foodsInitialState);
+  const initialState = {
+    isOpenOrderDialog: false,
+    selectedFood: null,
+    selectedFoodCount: 1,
+  }
+  const [state, setState] = useState(initialState)
   useEffect(() => {
     dispatch({ type: foodsActionTypes.FETCHING });
     fetchFoods(match.params.restaurantId)
@@ -89,7 +96,7 @@ export const Foods = ({
               {
                 [...Array(12).keys()].map(i =>
                   <ItemWrapper key={i}>
-                    <Skeleton key={i} variant="rect" width={450} height={180} />
+                    <Skeleton key={i} variant="rectangular" width={450} height={180} />
                   </ItemWrapper>
                 )
               }
@@ -99,13 +106,30 @@ export const Foods = ({
               <ItemWrapper key= {food.id}>
                 <FoodWrapper
                   food={food}
-                  onClickFoodWrapper={(food) => console.log(food)}
+                  onClickFoodWrapper={
+                    (food) => setState({
+                      ...state,
+                      isOpenOrderDialog: true,
+                      selectedFood: food,
+                    })
+                  }
                   imageUrl={FoodImage}
                 />
               </ItemWrapper>
             )
         }
       </FoodList>
+      {
+        state.isOpenOrderDialog &&
+          <FoodOrderDialog
+            food={state.selectedFood}
+            isOpen={state.isOpenOrderDialog}
+            onClose={() => setState({
+              ...state,
+              isOpenOrderDialog: false,
+            })}
+          />
+      }
     </Fragment>
-  )
+  );
 }

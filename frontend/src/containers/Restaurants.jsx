@@ -2,7 +2,7 @@ import React, { Fragment, useReducer, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 // components
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 // apis
 import { fetchRestaurants } from '../apis/restaurants';
 // reducers
@@ -91,9 +91,9 @@ export const Restaurants = () => {
         {
           state.fetchState === REQUEST_STATE.LOADING ?
             <Fragment>
-              <Skeleton variant="rect" width={450} height={300} />
-              <Skeleton variant="rect" width={450} height={300} />
-              <Skeleton variant="rect" width={450} height={300} />
+              <Skeleton variant="rectangular" width={450} height={300} />
+              <Skeleton variant="rectangular" width={450} height={300} />
+              <Skeleton variant="rectangular" width={450} height={300} />
             </Fragment>
           :
             state.restaurantsList.map((item, index) =>
@@ -108,5 +108,5 @@ export const Restaurants = () => {
         }
       </RestaurantsContentsList>
     </Fragment>
-  )
+  );
 }

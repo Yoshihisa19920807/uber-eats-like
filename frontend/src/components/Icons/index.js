@@ -1,2 +1,2 @@
-export { default as LocalMallIcon } from '@material-ui/icons/LocalMall';
-export { default as QueryBuilderIcon } from '@material-ui/icons/QueryBuilder';
+export { default as LocalMallIcon } from '@mui/icons-material/LocalMall';
+export { default as QueryBuilderIcon } from '@mui/icons-material/QueryBuilder';
