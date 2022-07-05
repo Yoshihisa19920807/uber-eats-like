@@ -3,6 +3,7 @@
 module Api
   module V1
     class LineFoodsController < ApplicationController
+      protect_from_forgery with: :null_session
       before_action :set_food, only: %i[create replace]
 
       def index
@@ -29,7 +30,6 @@ module Api
           }, status: :not_acceptable
         end
         set_line_food(@ordered_food)
-
         if @line_food.save
           render json: {
             line_food: @line_food
@@ -60,17 +60,19 @@ module Api
       end
 
       def set_line_food(ordered_food)
-        @line_food = if ordered_food.line_food.present?
-                       ordered_food.line_food.attributes(
-                         count: ordered_food.line_food.count += params[:count],
-                         is_active: true
-                       )
-                     else
-                       ordered_food.line_food.build(
-                         count: params[:count],
-                         is_active: true
-                       )
-                     end
+        if ordered_food.line_food.present?
+          @line_food = ordered_food.line_food
+          @line_food.attributes = {
+            count: ordered_food.line_food.count + params[:count],
+            is_active: true
+          }
+        else
+          @line_food = ordered_food.build_line_food(
+            count: params[:count],
+            restaurant: ordered_food.restaurant,
+            active: true
+          )
+        end
       end
     end
   end
