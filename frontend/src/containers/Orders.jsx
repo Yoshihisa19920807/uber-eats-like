@@ -1,6 +1,23 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useReducer, useEffect } from 'react';
+import { fetchLineFoods } from '../apis/line_foods';
+import { lineFoodsActionTypes, initialState, lineFoodsReducer } from '../reducers/lineFoods';
 
 export const Orders = () => {
+  const [state, dispatch] = useReducer(lineFoodsReducer, initialState);
+  useEffect(() => {
+    dispatch({ type: lineFoodsActionTypes.FETCHING });
+    fetchLineFoods()
+    // １行なら{}がなくても動く
+    .then((data) => {
+      dispatch({
+        type: lineFoodsActionTypes.FETCH_SUCCESS,
+        payload: {
+          lineFoodsSummary: data
+        }
+      })
+    })
+    .catch((e) => console.error(e));
+  }, []);
   return (
     <Fragment>
       注文画面

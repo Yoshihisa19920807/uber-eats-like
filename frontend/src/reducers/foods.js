@@ -1,7 +1,7 @@
 import { REQUEST_STATE } from "../constants";
 
 export const initialState = {
-  FETCHING: 'FETCHING',
+  fetchState: REQUEST_STATE.INITIAL,
   foodsList: []
 }
 
