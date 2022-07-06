@@ -2,7 +2,8 @@
 
 module Api
   module V1
-    class OrdersConroller < ApplicationController
+    class OrdersController < ApplicationController
+      protect_from_forgery with: :null_session
       def create
         posted_line_foods = LineFood.where(id: params[:line_food_ids])
         order = Order.new(

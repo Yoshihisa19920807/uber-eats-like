@@ -18,3 +18,13 @@ export const RoundButton = styled(BaseButton)`
   border: none;
   background-color: ${COLORS.SUB_BUTTON};
 `
+
+export const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 32px;
+`;
+
+export const MainLogoImage = styled.img`
+  height: 90px;
+`

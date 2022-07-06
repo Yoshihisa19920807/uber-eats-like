@@ -7,6 +7,7 @@ import { LocalMallIcon, QueryBuilderIcon } from '../components/Icons/index'
 import { FoodWrapper } from '../components/FoodWrapper';
 import { FoodOrderDialog } from '../components/FoodOrderDialog';
 import { NewOrderConfirmDialog } from '../components/NewOrderConfirmDialog';
+import { HeaderWrapper, MainLogoImage } from '../components/shared_style';
 // apis
 import { postLineFoods, replaceLineFoods } from '../apis/line_foods';
 // reducers
@@ -26,22 +27,12 @@ import { HTTP_STATUS_CODE } from '../constants';
 import FoodImage from '../images/food-image.jpg';
 import MainLogo from '../images/logo.png';
 
-const HeaderWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 32px;
-`;
-
 const BagIconWrapper = styled.div`
   padding-top: 24px;
 `
 
 const ColoredBagIcon = styled.div`
   color: ${COLORS.MAIN};
-`
-
-const MainLogoImage = styled.img`
-  height: 90px;
 `
 
 const FoodList = styled.div`

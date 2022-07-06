@@ -1,14 +1,14 @@
 import { REQUEST_STATE } from "../constants";
-import { foodsActionTypes } from "./foods";
 
 export const initialState = {
   fetchState: REQUEST_STATE.INITIAL,
   postState: REQUEST_STATE.INITIAL,
-  lineFoodsList: [],
+  lineFoodsSummary: null,
 }
 
 export const lineFoodsActionTypes = {
   POSTING: 'POSTING',
+  POST_SUCCESS: 'POST_SUCCESS',
   FETCHING: 'FETCHING',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
 }
@@ -21,10 +21,9 @@ export const lineFoodsReducer = (state, action) => {
         fetchState: REQUEST_STATE.LOADING,
       }
     case lineFoodsActionTypes.FETCH_SUCCESS:
-      console.log(action.payload)
       return {
         fetchState: REQUEST_STATE.OK,
-        lineFoodsList: action.payload.lineFoodsSummary
+        lineFoodsSummary: action.payload.lineFoodsSummary,
       }
     case lineFoodsActionTypes.POSTING:
       return {
