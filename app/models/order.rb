@@ -3,7 +3,7 @@
 class Order < ApplicationRecord
   has_many :line_foods
 
-  validates :total_price, numerically: { greater_than: 0 }
+  validates :total_price, numericality: { greater_than: 0 }
 
   # コントローラでやればいいのでは？
   # 複数箇所で使う場合にこちらの方が都合良さげ
